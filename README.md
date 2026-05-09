@@ -9,12 +9,12 @@ python -m pip install -r requirements.txt
 copy .env.example .env
 ```
 
-在 `.env` 中填写 `OPENAI_API_KEY`。如果只是测试目录与接口流程，可以设置 `MOCK_LLM=1`。
+在 `.env` 中填写 `DEEPSEEK_API_KEY`。如果只是测试目录与接口流程，可以设置 `MOCK_LLM=1`。
 
 ## 启动 API
 
 ```bash
-uvicorn app:app --reload --host 127.0.0.1 --port 8000
+uvicorn app:app --reload --host 127.0.0.1 --port 8001
 ```
 
 健康检查：
@@ -28,13 +28,13 @@ curl http://127.0.0.1:8001/health
 ```bash
 curl -X POST http://127.0.0.1:8001/generate ^
   -H "Content-Type: application/json" ^
-  -d "{\"logline\":\"一个害怕公开发声的女孩发现姐姐的未婚夫是骗子\",\"duration_minutes\":100,\"theme_question\":\"当真相会伤害家人时，还要不要说出来？\",\"genre\":\"家庭悬疑\"}"
+  -d "{\"logline\":\"一个从小不敢违抗母亲的女孩，为了阻止姐姐嫁给骗子，必须在婚礼前揭穿真相，否则姐姐将陷入谎言婚姻，而她也会永远失去为自己发声的机会。\",\"duration_minutes\":100,\"theme_question\":\"当真相会伤害家人时，还要不要说出来？\",\"genre\":\"家庭悬疑\"}"
 ```
 
 ## 本地 CLI
 
 ```bash
-python main.py --logline "一个害怕公开发声的女孩发现姐姐的未婚夫是骗子" --duration 100 --theme "当真相会伤害家人时，还要不要说出来？"
+python main.py --logline "一个从小不敢违抗母亲的女孩，为了阻止姐姐嫁给骗子，必须在婚礼前揭穿真相，否则姐姐将陷入谎言婚姻，而她也会永远失去为自己发声的机会。" --duration 100 --theme "当真相会伤害家人时，还要不要说出来？"
 ```
 
 ## 输出

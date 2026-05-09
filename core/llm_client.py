@@ -21,9 +21,9 @@ class LLMClient:
         if self.settings.mock_llm:
             return self._mock_response(stage_name, messages)
 
-        if not self.settings.openai_api_key:
+        if not self.settings.deepseek_api_key:
             raise RuntimeError(
-                "OPENAI_API_KEY is not set. Add it to .env, or set MOCK_LLM=1 for a dry run."
+                "DEEPSEEK_API_KEY is not set. Add it to .env, or set MOCK_LLM=1 for a dry run."
             )
 
         try:
@@ -32,8 +32,8 @@ class LLMClient:
             raise RuntimeError("Package 'openai' is missing. Run: pip install -r requirements.txt") from exc
 
         client = OpenAI(
-            api_key=self.settings.openai_api_key,
-            base_url=self.settings.openai_base_url,
+            api_key=self.settings.deepseek_api_key,
+            base_url=self.settings.deepseek_base_url,
             timeout=self.settings.request_timeout,
         )
         payload = {

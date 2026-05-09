@@ -34,8 +34,8 @@ def _int_env(name: str, default: int) -> int:
 
 @dataclass(frozen=True)
 class Settings:
-    openai_api_key: str
-    openai_base_url: str | None
+    deepseek_api_key: str
+    deepseek_base_url: str | None
     model_name: str
     temperature: float
     max_tokens: int | None
@@ -52,9 +52,9 @@ def get_settings() -> Settings:
     max_tokens_raw = os.getenv("MAX_TOKENS", "").strip()
 
     return Settings(
-        openai_api_key=os.getenv("OPENAI_API_KEY", ""),
-        openai_base_url=os.getenv("OPENAI_BASE_URL") or None,
-        model_name=os.getenv("MODEL_NAME", os.getenv("OPENAI_MODEL", "gpt-4o-mini")),
+        deepseek_api_key=os.getenv("DEEPSEEK_API_KEY", ""),
+        deepseek_base_url=os.getenv("DEEPSEEK_BASE_URL") or None,
+        model_name=os.getenv("MODEL_NAME", os.getenv("DEEPSEEK_MODEL", "gpt-4o-mini")),
         temperature=_float_env("TEMPERATURE", 0.7),
         max_tokens=int(max_tokens_raw) if max_tokens_raw else None,
         request_timeout=_int_env("REQUEST_TIMEOUT", 180),
