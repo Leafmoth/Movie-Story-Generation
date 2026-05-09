@@ -16,5 +16,7 @@ class ProjectState(TypedDict, total=False):
     biography: str
     outline: str
     final_script: str
+    storyboard: str
+    include_storyboard: bool
     stage_files: dict[str, str]
     metadata: dict[str, Any]

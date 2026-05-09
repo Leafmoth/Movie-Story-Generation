@@ -23,13 +23,14 @@ class PromptStage:
     storage: ProjectStorage
     placeholders: Mapping[str, str] = field(default_factory=dict)
     postprocess: PostProcess | None = None
+    system_prompt: str = "你是一位从业十余年的资深电影编剧。严格遵守用户给定提示词，不改变原意。"
 
     def run(self, state: ProjectState) -> ProjectState:
         prompt = self._render_prompt(state)
         messages = [
             ChatMessage(
                 role="system",
-                content="你是一位从业十余年的资深电影编剧。严格遵守用户给定提示词，不改变原意。",
+                content=self.system_prompt,
             ),
             ChatMessage(role="user", content=prompt),
         ]

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import warnings
+from pathlib import Path
 from typing import Any, Mapping
 
 try:
@@ -32,6 +33,7 @@ from stages.logline_stage import make_logline_stage
 from stages.outline_stage import make_outline_stage
 from stages.relationship_stage import make_relationship_stage
 from stages.scene_write_stage import make_scene_write_stage
+from stages.storyboard_stage import make_storyboard_stage
 
 
 class StoryOrchestrator:
@@ -39,9 +41,14 @@ class StoryOrchestrator:
         self.settings = settings or get_settings()
         self.storage = ProjectStorage(self.settings.output_root)
         self.llm = LLMClient(self.settings)
+        self.storyboard_stage = make_storyboard_stage(
+            prompt_dir=self.settings.prompt_dir,
+            llm=self.llm,
+            storage=self.storage,
+        )
         self.graph = self._build_graph()
 
-    def generate(self, data: Mapping[str, Any]) -> ProjectState:
+    def generate(self, data: Mapping[str, Any], *, include_storyboard: bool = True) -> ProjectState:
         project_id = str(data.get("project_id") or self.storage.new_project_id())
         output_dir = self.storage.create_project_dir(project_id)
 
@@ -52,11 +59,43 @@ class StoryOrchestrator:
             "theme_question": str(data.get("theme_question") or "").strip(),
             "duration_minutes": int(data["duration_minutes"]),
             "genre": str(data.get("genre") or "").strip(),
+            "include_storyboard": include_storyboard,
             "stage_files": {},
             "metadata": {"model": self.settings.model_name},
         }
 
         return self.graph.invoke(initial_state)
+
+    def generate_storyboard_from_script(
+        self,
+        *,
+        final_script: str,
+        project_id: str | None = None,
+        output_dir: str | None = None,
+        final_script_path: str | None = None,
+    ) -> ProjectState:
+        if output_dir:
+            project_dir = Path(output_dir).resolve()
+            project_dir.mkdir(parents=True, exist_ok=True)
+        elif final_script_path:
+            project_dir = Path(final_script_path).resolve().parent
+            project_dir.mkdir(parents=True, exist_ok=True)
+        else:
+            project_dir = self.storage.create_project_dir(project_id or self.storage.new_project_id())
+
+        state: ProjectState = {
+            "project_id": project_id or project_dir.name,
+            "output_dir": str(project_dir.resolve()),
+            "final_script": final_script,
+            "stage_files": {},
+            "metadata": {"model": self.settings.model_name, "source": "storyboard_from_script"},
+        }
+        if final_script_path:
+            state["stage_files"] = {"final_script": final_script_path}
+
+        updates = self.storyboard_stage.run(state)
+        state.update(updates)
+        return state
 
     def _build_graph(self):
         if StateGraph is None:
@@ -74,6 +113,7 @@ class StoryOrchestrator:
             "biography": make_biography_stage(**stage_kwargs),
             "outline": make_outline_stage(**stage_kwargs),
             "scene_write": make_scene_write_stage(**stage_kwargs),
+            "storyboard": self.storyboard_stage,
         }
 
         graph = StateGraph(ProjectState)
@@ -86,5 +126,12 @@ class StoryOrchestrator:
         graph.add_edge("relationships", "biography")
         graph.add_edge("biography", "outline")
         graph.add_edge("outline", "scene_write")
-        graph.add_edge("scene_write", END)
+        graph.add_conditional_edges("scene_write", _route_after_scene_write)
+        graph.add_edge("storyboard", END)
         return graph.compile()
+
+
+def _route_after_scene_write(state: ProjectState) -> str:
+    if state.get("include_storyboard", True):
+        return "storyboard"
+    return END
