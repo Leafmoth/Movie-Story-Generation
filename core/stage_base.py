@@ -35,7 +35,7 @@ class PromptStage:
             ChatMessage(role="user", content=prompt),
         ]
         content = self.llm.generate(messages, stage_name=self.name)
-        saved_path = self.storage.save_stage(state["output_dir"], self.output_filename, content)
+        saved_path = self.save_content(state, content)
 
         stage_files = dict(state.get("stage_files", {}))
         stage_files[self.output_key] = saved_path
@@ -47,6 +47,9 @@ class PromptStage:
         if self.postprocess is not None:
             updates.update(self.postprocess(state, content))
         return updates
+
+    def save_content(self, state: ProjectState, content: str) -> str:
+        return self.storage.save_stage(state["output_dir"], self.output_filename, content)
 
     def _render_prompt(self, state: ProjectState) -> str:
         template = (self.prompt_dir / self.prompt_file).read_text(encoding="utf-8")
