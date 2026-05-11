@@ -79,6 +79,13 @@ class StageSectionResponse(BaseModel):
     outline: Optional[str] = None
 
 
+class ProjectStoryboardResponse(BaseModel):
+    project_id: str
+    rows: list[list[str]]
+    display_text: str
+    file_url: Optional[str] = None
+
+
 job_executor = ThreadPoolExecutor(max_workers=2)
 jobs_lock = Lock()
 jobs: dict[str, dict[str, Any]] = {}
@@ -263,6 +270,35 @@ def get_story_job_outline(job_id: str) -> StageSectionResponse:
 @app.get("/api/projects/{project_id}/outline", response_model=StageSectionResponse)
 def get_project_outline(project_id: str) -> StageSectionResponse:
     return _project_stage_section_response(project_id, "outline")
+
+
+@app.get("/api/projects/{project_id}/storyboard", response_model=ProjectStoryboardResponse)
+def get_project_storyboard(project_id: str) -> ProjectStoryboardResponse:
+    path = _resolve_project_file(project_id, "storyboard")
+    if path is None:
+        raise HTTPException(status_code=404, detail=f"Storyboard file not found for project: {project_id}")
+
+    rows = _read_storyboard_xlsx(path)
+    return ProjectStoryboardResponse(
+        project_id=project_id,
+        rows=rows,
+        display_text=_storyboard_rows_to_markdown(rows),
+        file_url=f"/api/projects/{project_id}/files/storyboard",
+    )
+
+
+@app.get("/api/projects/{project_id}/files/{file_type}")
+def download_project_file(project_id: str, file_type: str) -> FileResponse:
+    file_key = FILE_TYPE_ALIASES.get(file_type)
+    if file_key is None:
+        supported = ", ".join(sorted(FILE_TYPE_ALIASES))
+        raise HTTPException(status_code=400, detail=f"Unsupported file_type. Supported values: {supported}")
+
+    file_path = _resolve_project_file(project_id, file_key)
+    if file_path is None:
+        raise HTTPException(status_code=404, detail=f"File is not available for type: {file_type}")
+
+    return FileResponse(path=file_path, filename=file_path.name, media_type=_media_type_for(file_path))
 
 
 @app.get("/api/story-jobs/{job_id}/files/{file_type}")
@@ -661,6 +697,49 @@ def _format_outline_display(data: Any) -> str:
 
 def _format_display_value(value: Any) -> str:
     return "\n".join(_format_value_lines(value)).strip()
+
+
+def _read_storyboard_xlsx(path: Path) -> list[list[str]]:
+    try:
+        from openpyxl import load_workbook
+    except ImportError as exc:  # pragma: no cover - depends on local env
+        raise RuntimeError("Package 'openpyxl' is missing. Run: pip install -r requirements.txt") from exc
+
+    workbook = load_workbook(path, read_only=True, data_only=True)
+    worksheet = workbook.active
+    rows: list[list[str]] = []
+
+    for row in worksheet.iter_rows(values_only=True):
+        values = ["" if cell is None else str(cell).strip() for cell in row]
+        while values and values[-1] == "":
+            values.pop()
+        if values:
+            rows.append(values)
+
+    workbook.close()
+    return rows
+
+
+def _storyboard_rows_to_markdown(rows: list[list[str]]) -> str:
+    if not rows:
+        return ""
+
+    width = max(len(row) for row in rows)
+
+    def normalize(row: list[str]) -> list[str]:
+        values = row[:]
+        if len(values) < width:
+            values.extend([""] * (width - len(values)))
+        return [value.replace("|", "\\|").replace("\n", " ").strip() for value in values]
+
+    header = normalize(rows[0])
+    lines = [
+        "| " + " | ".join(header) + " |",
+        "| " + " | ".join(["---"] * width) + " |",
+    ]
+    for row in rows[1:]:
+        lines.append("| " + " | ".join(normalize(row)) + " |")
+    return "\n".join(lines)
 
 
 def _format_value_lines(value: Any) -> list[str]:

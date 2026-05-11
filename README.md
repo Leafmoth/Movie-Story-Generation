@@ -610,7 +610,7 @@ outputs/
 | `04_biography.json` | 人物小传 |
 | `05_outline.json` | 三幕式大纲与章节细纲 |
 | `final_script.md` | 文学剧本 |
-| `06_storyboard.xlsx` | 分镜表 |
+| `06_storyboard.xlsx` | 分镜表，当前使用 10 列镜头生成格式，最后一列“修改建议落地”默认留空 |
 
 ## 项目目录结构
 
@@ -651,7 +651,8 @@ MoiveStoryGeneration/
     biography_prompt.txt    # 人物小传提示词
     outline_prompt.txt      # 大纲提示词
     scene_write_prompt.txt  # 文学剧本提示词
-    storyboard_prompt.txt   # 分镜表提示词
+    storyboard_prompt.txt   # 旧版分镜表提示词，保留备用
+    storyboard_prompt2.txt  # 当前主业务使用的新版镜头生成提示词
 
   schemas/
     story.py                # API 请求/响应模型
@@ -699,6 +700,14 @@ storyboard 分镜表，可选
 3. 调用大模型生成内容。
 4. 保存到 `outputs/{project_id}/`。
 5. 把结果写回任务状态，供 API 查询。
+
+当前分镜阶段使用 `prompts/storyboard_prompt2.txt`，生成 `06_storyboard.xlsx` 时会按以下列输出：
+
+```text
+# | 场次-镜号 | 画面核心内容 | 光学参数 | 景别 | 运镜调度 | 构图要求（前+中+后） | 光影色彩 风格 | 物理/AI 约束 | 修改建议落地
+```
+
+其中最后一列“修改建议落地”会在写入 Excel 时强制留空。
 
 ## 前端展示建议
 

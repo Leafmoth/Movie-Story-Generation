@@ -11,31 +11,29 @@ from core.storage import ProjectStorage
 
 
 HEADERS = [
-    "场次",
-    "镜号",
-    "镜头类型/景别",
-    "画面内容",
-    "人物调度",
-    "摄影机角度",
-    "摄影机运动",
-    "声音/对白",
-    "剪辑/转场",
-    "时长",
-    "镜头目的",
+    "#",
+    "场次-镜号",
+    "画面核心内容",
+    "光学参数",
+    "景别",
+    "运镜调度",
+    "构图要求（前+中+后）",
+    "光影色彩 风格",
+    "物理/AI 约束",
+    "修改建议落地",
 ]
 
 HEADER_ALIASES = {
-    "场次": {"场次", "章节", "章", "场"},
-    "镜号": {"镜号", "镜头号", "镜头编号"},
-    "镜头类型/景别": {"镜头类型/景别", "景别/镜头", "景别", "镜头类型"},
-    "画面内容": {"画面内容", "画面", "镜头内容"},
-    "人物调度": {"人物调度", "调度"},
-    "摄影机角度": {"摄影机角度", "机位角度", "角度"},
-    "摄影机运动": {"摄影机运动", "摄影机移动", "运动"},
-    "声音/对白": {"声音/对白", "声音", "对白"},
-    "剪辑/转场": {"剪辑/转场", "剪辑", "转场"},
-    "时长": {"时长", "镜头时长", "预计时长"},
-    "镜头目的": {"镜头目的", "目的", "镜头任务"},
+    "#": {"#", "序号", "编号"},
+    "场次-镜号": {"场次-镜号", "场次镜号", "场次/镜号", "场号-镜号", "镜号"},
+    "画面核心内容": {"画面核心内容", "画面内容", "核心画面", "镜头内容"},
+    "光学参数": {"光学参数", "镜头参数", "焦段", "光圈", "镜头/光学参数"},
+    "景别": {"景别", "镜头类型", "镜头类型/景别", "景别/镜头"},
+    "运镜调度": {"运镜调度", "运镜", "摄影机运动", "人物调度"},
+    "构图要求（前+中+后）": {"构图要求（前+中+后）", "构图要求", "前中后景", "前+中+后"},
+    "光影色彩 风格": {"光影色彩 风格", "光影色彩风格", "光影色彩", "色彩风格", "影调风格"},
+    "物理/AI 约束": {"物理/AI 约束", "物理AI约束", "物理约束", "AI约束", "约束"},
+    "修改建议落地": {"修改建议落地", "修改建议", "落地建议"},
 }
 
 
@@ -49,7 +47,7 @@ class StoryboardXlsxStage(PromptStage):
 def make_storyboard_stage(prompt_dir: Path, llm: LLMClient, storage: ProjectStorage) -> PromptStage:
     return StoryboardXlsxStage(
         name="storyboard",
-        prompt_file="storyboard_prompt.txt",
+        prompt_file="storyboard_prompt2.txt",
         output_key="storyboard",
         output_filename="06_storyboard.xlsx",
         prompt_dir=prompt_dir,
@@ -88,7 +86,7 @@ def write_storyboard_xlsx(csv_content: str, output_path: Path) -> None:
     header_alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
     body_alignment = Alignment(vertical="top", wrap_text=True)
 
-    widths = [12, 10, 18, 42, 30, 18, 18, 32, 22, 12, 34]
+    widths = [6, 16, 44, 22, 14, 26, 34, 24, 30, 24]
     for index, width in enumerate(widths, start=1):
         worksheet.column_dimensions[get_column_letter(index)].width = width
 
@@ -158,7 +156,7 @@ def parse_csv_rows(content: str) -> list[list[str]]:
 
 def normalize_data_row(row: list[str]) -> list[str]:
     if len(row) == len(HEADERS) - 1:
-        return normalize_row(row[:9] + [""] + row[9:])
+        return normalize_row(row + [""])
     return normalize_row(row)
 
 
@@ -166,6 +164,7 @@ def normalize_row(row: list[str]) -> list[str]:
     values = row[: len(HEADERS)]
     if len(values) < len(HEADERS):
         values.extend([""] * (len(HEADERS) - len(values)))
+    values[-1] = ""
     return values
 
 
@@ -183,7 +182,15 @@ def is_header_row(row: list[str]) -> bool:
 
 
 def normalize_header_cell(value: str) -> str:
-    return value.strip().replace(" ", "").replace("\t", "").replace("|", "").lower()
+    return (
+        value.strip()
+        .replace(" ", "")
+        .replace("\t", "")
+        .replace("|", "")
+        .replace("(", "（")
+        .replace(")", "）")
+        .lower()
+    )
 
 
 def strip_code_fence(content: str) -> str:
