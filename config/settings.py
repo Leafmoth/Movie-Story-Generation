@@ -32,6 +32,21 @@ def _int_env(name: str, default: int) -> int:
     return int(value)
 
 
+def _bool_env(name: str, default: bool) -> bool:
+    value = os.getenv(name)
+    if value is None or value == "":
+        return default
+    return value.lower() in {"1", "true", "yes", "on"}
+
+
+def _csv_env(name: str, default: str) -> tuple[str, ...]:
+    value = os.getenv(name, default).strip()
+    items = tuple(item.strip() for item in value.split(",") if item.strip())
+    if items:
+        return items
+    return tuple(item.strip() for item in default.split(",") if item.strip())
+
+
 @dataclass(frozen=True)
 class Settings:
     deepseek_api_key: str
@@ -43,6 +58,10 @@ class Settings:
     output_root: Path
     prompt_dir: Path
     mock_llm: bool
+    cors_allow_origins: tuple[str, ...]
+    cors_allow_credentials: bool
+    cors_allow_methods: tuple[str, ...]
+    cors_allow_headers: tuple[str, ...]
 
 
 def get_settings() -> Settings:
@@ -61,4 +80,8 @@ def get_settings() -> Settings:
         output_root=output_root,
         prompt_dir=prompt_dir,
         mock_llm=os.getenv("MOCK_LLM", "").lower() in {"1", "true", "yes", "on"},
+        cors_allow_origins=_csv_env("CORS_ALLOW_ORIGINS", "*"),
+        cors_allow_credentials=_bool_env("CORS_ALLOW_CREDENTIALS", False),
+        cors_allow_methods=_csv_env("CORS_ALLOW_METHODS", "*"),
+        cors_allow_headers=_csv_env("CORS_ALLOW_HEADERS", "*"),
     )
