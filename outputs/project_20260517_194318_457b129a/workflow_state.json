@@ -1,0 +1,89 @@
+{
+  "job_id": "dbe1751f6a314029b733ff0eb133910c",
+  "status": "waiting_confirmation",
+  "workflow_mode": "interactive",
+  "current_stage": "outline",
+  "pending_confirmation": {
+    "stage": "outline",
+    "stage_url": "/api/story-jobs/dbe1751f6a314029b733ff0eb133910c/stages/outline",
+    "actions": [
+      "approve",
+      "revise"
+    ]
+  },
+  "confirmed_stages": [],
+  "revision_counts": {},
+  "available_sections": [
+    "logline",
+    "world",
+    "characters",
+    "relationships",
+    "relationship_graph",
+    "outline",
+    "outline_critic"
+  ],
+  "pass_score": 85,
+  "max_critic_retries": 3,
+  "cancel_requested": false,
+  "replaced_by_job_id": null,
+  "critic_reports": [
+    {
+      "attempt": 0,
+      "score": 75,
+      "passed": false,
+      "issues": [
+        "大纲顶层缺少数字 duration_minutes。",
+        "大纲缺少 chapter_outline 章节数组，无法建立时长预算。"
+      ],
+      "revision_advice": "请重写大纲的时长预算：duration_minutes 必须为 5；three_act_outline 每一幕必须包含数字 duration_minutes；chapter_outline 每个章节必须包含数字 duration_minutes，所有章节相加等于 5 分钟，总和不能有误差；第一幕、第二幕、第三幕时长分别约为 25%、50%、25%，幕比例误差不超过 1 分钟。",
+      "duration_check": {
+        "target_minutes": 5.0,
+        "tolerance_minutes": 1.0
+      }
+    },
+    {
+      "attempt": 1,
+      "score": 75,
+      "passed": false,
+      "issues": [
+        "大纲顶层缺少数字 duration_minutes。",
+        "大纲缺少 chapter_outline 章节数组，无法建立时长预算。"
+      ],
+      "revision_advice": "请重写大纲的时长预算：duration_minutes 必须为 5；three_act_outline 每一幕必须包含数字 duration_minutes；chapter_outline 每个章节必须包含数字 duration_minutes，所有章节相加等于 5 分钟，总和不能有误差；第一幕、第二幕、第三幕时长分别约为 25%、50%、25%，幕比例误差不超过 1 分钟。",
+      "duration_check": {
+        "target_minutes": 5.0,
+        "tolerance_minutes": 1.0
+      }
+    },
+    {
+      "attempt": 2,
+      "score": 75,
+      "passed": false,
+      "issues": [
+        "大纲顶层缺少数字 duration_minutes。",
+        "大纲缺少 chapter_outline 章节数组，无法建立时长预算。"
+      ],
+      "revision_advice": "请重写大纲的时长预算：duration_minutes 必须为 5；three_act_outline 每一幕必须包含数字 duration_minutes；chapter_outline 每个章节必须包含数字 duration_minutes，所有章节相加等于 5 分钟，总和不能有误差；第一幕、第二幕、第三幕时长分别约为 25%、50%、25%，幕比例误差不超过 1 分钟。",
+      "duration_check": {
+        "target_minutes": 5.0,
+        "tolerance_minutes": 1.0
+      }
+    },
+    {
+      "attempt": 3,
+      "score": 75,
+      "passed": false,
+      "issues": [
+        "大纲顶层缺少数字 duration_minutes。",
+        "大纲缺少 chapter_outline 章节数组，无法建立时长预算。"
+      ],
+      "revision_advice": "请重写大纲的时长预算：duration_minutes 必须为 5；three_act_outline 每一幕必须包含数字 duration_minutes；chapter_outline 每个章节必须包含数字 duration_minutes，所有章节相加等于 5 分钟，总和不能有误差；第一幕、第二幕、第三幕时长分别约为 25%、50%、25%，幕比例误差不超过 1 分钟。",
+      "duration_check": {
+        "target_minutes": 5.0,
+        "tolerance_minutes": 1.0
+      }
+    }
+  ],
+  "project_id": "project_20260517_194318_457b129a",
+  "updated_at": "2026-05-17T11:43:18.914213+00:00"
+}

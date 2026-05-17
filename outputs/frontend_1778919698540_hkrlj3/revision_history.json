@@ -1,0 +1,23 @@
+[
+  {
+    "stage": "relationships",
+    "action": "approve",
+    "feedback": "",
+    "revision_mode": null,
+    "created_at": "2026-05-16T08:23:41.187588+00:00"
+  },
+  {
+    "stage": "outline",
+    "action": "approve",
+    "feedback": "",
+    "revision_mode": null,
+    "created_at": "2026-05-16T08:24:58.982353+00:00"
+  },
+  {
+    "stage": "final_script",
+    "action": "approve",
+    "feedback": "",
+    "revision_mode": null,
+    "created_at": "2026-05-16T08:26:15.994065+00:00"
+  }
+]

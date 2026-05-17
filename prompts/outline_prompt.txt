@@ -9,10 +9,17 @@
 角色关系：
 [[character_relations]]
 
-角色小传：
-[[biography]]
+请以角色设置和角色关系作为人物依据，不再额外生成人物小传。
 
 影片时长：[[duration_minutes]]分钟
+
+时长预算硬性要求：
+1. 输出的 duration_minutes 必须等于影片时长 [[duration_minutes]]。
+2. chapter_outline 中每个章节的 duration_minutes 必须是数字，不能写“约”“建议”“若干分钟”等模糊表达。
+3. three_act_outline 中每一幕也必须包含数字 duration_minutes。
+4. 所有章节 duration_minutes 相加必须等于 [[duration_minutes]] 分钟。
+5. 第一幕、第二幕、第三幕的章节时长合计分别约为 25% / 50% / 25%，允许小幅四舍五入误差。
+6. 如果目标片长较长，需要增加章节数量，而不是让单个章节承担过长时间。
 
 经典三幕结构
 第一幕：建立世界与问题（时长占比25%）
@@ -51,21 +58,31 @@
 比如主角要救一个人，这是外部冲突；但救人会暴露他过去的秘密，这是内部冲突；而制度不允许他行动，这是社会冲突。
 戏就厚了。
 
-请结合影片时长输出三幕式大纲，并在三幕式大纲之后生成章节细纲。
+请结合影片时长输出三幕式大纲，并在三幕式大纲之后生成章节细纲。时长字段必须能被程序直接读取和相加。
 
 输出 JSON 结构：
+以下结构中的 25、50、25 只是 100 分钟影片的比例示例；实际输出必须按 [[duration_minutes]] 重新计算为数字。
 {
-  "duration_minutes": 100,
+  "duration_minutes": [[duration_minutes]],
   "three_act_outline": {
-    "act_1": "第一幕大纲，约25%时长",
-    "act_2": "第二幕大纲，约50%时长",
-    "act_3": "第三幕大纲，约25%时长"
+    "act_1": {
+      "duration_minutes": 25,
+      "summary": "第一幕大纲，约25%时长"
+    },
+    "act_2": {
+      "duration_minutes": 50,
+      "summary": "第二幕大纲，约50%时长"
+    },
+    "act_3": {
+      "duration_minutes": 25,
+      "summary": "第三幕大纲，约25%时长"
+    }
   },
   "chapter_outline": [
     {
       "chapter": "章节名或场次段落",
       "act": "所属幕",
-      "duration_minutes": "建议时长",
+      "duration_minutes": 10,
       "summary": "章节细纲"
     }
   ]

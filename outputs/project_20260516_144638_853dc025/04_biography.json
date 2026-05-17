@@ -1,0 +1,5 @@
+{
+  "mock": true,
+  "stage": "biography",
+  "content": "MOCK_LLM enabled. Prompt preview: 你是一位从业十余年的资深电影编剧，请根据**一段梗概**、**角色设置**和**角色关系**撰写电影角色小传。\\n\\n一段梗概：\\n{\\n  \"mock\": true,\\n  \"stage\": \"logline\",\\n  \"content\": \"MOCK_LLM enabled. Prompt preview: 你是一位从业十余年的资深电影编剧，请根据用户的输入补全完善电影的**一句话概括**与**主题问题**，把两者依次拼合形成**一段梗概**。\\\\n\\\\n创作输入：\\\\n用户输入的一"
+}

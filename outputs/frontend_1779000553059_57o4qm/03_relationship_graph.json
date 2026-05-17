@@ -1,0 +1,29 @@
+{
+  "relationship_graph": [
+    {
+      "source": "砾羽",
+      "target": "风喙",
+      "relationship": "被逐者与权威者"
+    },
+    {
+      "source": "砾羽",
+      "target": "羽穗",
+      "relationship": "保护者与被保护者"
+    },
+    {
+      "source": "砾羽",
+      "target": "棘爪",
+      "relationship": "施恩者与受恩者"
+    },
+    {
+      "source": "砾羽",
+      "target": "霜翼",
+      "relationship": "被同情者与旁观者"
+    },
+    {
+      "source": "风喙",
+      "target": "霜翼",
+      "relationship": "竞争者与失败者"
+    }
+  ]
+}

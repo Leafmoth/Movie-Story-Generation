@@ -1,0 +1,30 @@
+[
+  {
+    "stage": "characters",
+    "action": "approve",
+    "feedback": "",
+    "revision_mode": null,
+    "created_at": "2026-05-17T07:40:01.092588+00:00"
+  },
+  {
+    "stage": "relationships",
+    "action": "approve",
+    "feedback": "",
+    "revision_mode": null,
+    "created_at": "2026-05-17T07:40:54.080077+00:00"
+  },
+  {
+    "stage": "outline",
+    "action": "approve",
+    "feedback": "",
+    "revision_mode": null,
+    "created_at": "2026-05-17T07:43:53.219415+00:00"
+  },
+  {
+    "stage": "final_script",
+    "action": "approve",
+    "feedback": "",
+    "revision_mode": null,
+    "created_at": "2026-05-17T07:46:24.530105+00:00"
+  }
+]

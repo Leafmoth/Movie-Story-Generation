@@ -1,0 +1,29 @@
+{
+  "relationship_graph": [
+    {
+      "source": "阿木",
+      "target": "阿木的父亲（阿强）",
+      "relationship": "父子沉默对峙"
+    },
+    {
+      "source": "阿木",
+      "target": "陈大彪",
+      "relationship": "宿敌欺凌"
+    },
+    {
+      "source": "阿木",
+      "target": "李奶奶",
+      "relationship": "祖孙信念守护"
+    },
+    {
+      "source": "阿木",
+      "target": "小霞",
+      "relationship": "怯懦同伴"
+    },
+    {
+      "source": "阿木",
+      "target": "猪花花",
+      "relationship": "执念羁绊"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "job_id": "4fe9813c9ccd4a3eb047122cf5579810",
+  "status": "succeeded",
+  "workflow_mode": "interactive",
+  "current_stage": null,
+  "pending_confirmation": null,
+  "confirmed_stages": [
+    "logline"
+  ],
+  "revision_counts": {},
+  "available_sections": [
+    "logline",
+    "world",
+    "characters",
+    "relationships",
+    "relationship_graph",
+    "outline",
+    "outline_critic",
+    "final_script"
+  ],
+  "pass_score": 85,
+  "max_critic_retries": 3,
+  "cancel_requested": false,
+  "replaced_by_job_id": null,
+  "critic_reports": [
+    {
+      "attempt": 0,
+      "score": 95,
+      "passed": true,
+      "issues": [],
+      "revision_advice": ""
+    }
+  ],
+  "project_id": "project_20260517_130933_9d82b557",
+  "updated_at": "2026-05-17T05:09:33.231914+00:00"
+}

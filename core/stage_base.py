@@ -34,7 +34,15 @@ class PromptStage:
             ),
             ChatMessage(role="user", content=prompt),
         ]
-        content = self.llm.generate(messages, stage_name=self.name)
+        token_callback = state.get("llm_token_callback")
+        if callable(token_callback):
+            content = self.llm.generate_stream(
+                messages,
+                stage_name=self.name,
+                on_token=lambda token: token_callback(self.name, self.output_key, token, {}),
+            )
+        else:
+            content = self.llm.generate(messages, stage_name=self.name)
         saved_path = self.save_content(state, content)
 
         stage_files = dict(state.get("stage_files", {}))
@@ -62,6 +70,37 @@ class PromptStage:
 
         for key, value in values.items():
             template = template.replace(f"[[{key}]]", str(value or ""))
+
+        world_context = str(state.get("world") or "").strip()
+        if world_context and self.output_key in {"characters", "outline"}:
+            template = (
+                f"{template}\n\n"
+                "世界观设定，请后续创作严格遵守：\n"
+                f"{world_context}\n"
+            )
+
+        revision_feedback = str(state.get("revision_feedback") or "").strip()
+        if revision_feedback:
+            revision_mode = str(state.get("revision_mode") or "modify").strip()
+            previous_content = str(state.get(self.output_key) or "").strip()
+            if self.output_key == "logline" and revision_mode == "rewrite":
+                template = (
+                    f"{template}\n\n"
+                    "用户否认了上一版故事梗概，并选择重写。请只基于下面这版用户重写内容重新生成本阶段输出：\n"
+                    f"{revision_feedback}\n"
+                )
+            else:
+                template = (
+                    f"{template}\n"
+                    "用户对本阶段的修改反馈：\n"
+                    f"{revision_feedback}\n"
+                )
+                if previous_content:
+                    template = (
+                        f"{template}\n"
+                        "本阶段上一版输出如下，请结合用户反馈，在保留可用内容的基础上修改：\n"
+                        f"{previous_content}\n"
+                    )
         return template
 
 

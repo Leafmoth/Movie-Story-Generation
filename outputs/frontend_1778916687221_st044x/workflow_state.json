@@ -1,0 +1,30 @@
+{
+  "job_id": "a762392114c3485ba71cbb478af852a1",
+  "status": "succeeded",
+  "workflow_mode": "interactive",
+  "current_stage": null,
+  "pending_confirmation": null,
+  "confirmed_stages": [
+    "logline",
+    "world",
+    "characters",
+    "relationships",
+    "biography",
+    "outline",
+    "final_script"
+  ],
+  "revision_counts": {},
+  "available_sections": [
+    "logline",
+    "world",
+    "characters",
+    "relationships",
+    "biography",
+    "outline",
+    "final_script",
+    "storyboard"
+  ],
+  "pass_score": 85,
+  "project_id": "frontend_1778916687221_st044x",
+  "updated_at": "2026-05-16T07:52:57.251718+00:00"
+}

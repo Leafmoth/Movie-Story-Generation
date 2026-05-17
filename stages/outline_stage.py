@@ -18,8 +18,8 @@ def make_outline_stage(prompt_dir: Path, llm: LLMClient, storage: ProjectStorage
         storage=storage,
         placeholders={
             "Logline": "logline",
+            "world": "world",
             "characters": "characters",
             "character_relations": "character_relations",
-            "biography": "biography",
         },
     )

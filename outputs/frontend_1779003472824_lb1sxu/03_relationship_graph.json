@@ -1,0 +1,29 @@
+{
+  "relationship_graph": [
+    {
+      "source": "咕咕",
+      "target": "影喙",
+      "relationship": "族群路线对立"
+    },
+    {
+      "source": "咕咕",
+      "target": "云雀",
+      "relationship": "暗恋与沉默"
+    },
+    {
+      "source": "咕咕",
+      "target": "老橡",
+      "relationship": "师生互信"
+    },
+    {
+      "source": "咕咕",
+      "target": "小羽",
+      "relationship": "保护与依赖"
+    },
+    {
+      "source": "咕咕",
+      "target": "族群",
+      "relationship": "异类与主流"
+    }
+  ]
+}

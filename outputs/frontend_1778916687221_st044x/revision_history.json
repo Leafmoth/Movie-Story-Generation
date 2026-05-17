@@ -1,0 +1,51 @@
+[
+  {
+    "stage": "logline",
+    "action": "approve",
+    "feedback": "",
+    "revision_mode": null,
+    "created_at": "2026-05-16T07:32:14.166132+00:00"
+  },
+  {
+    "stage": "world",
+    "action": "approve",
+    "feedback": "",
+    "revision_mode": null,
+    "created_at": "2026-05-16T07:37:45.721655+00:00"
+  },
+  {
+    "stage": "characters",
+    "action": "approve",
+    "feedback": "",
+    "revision_mode": null,
+    "created_at": "2026-05-16T07:40:30.248807+00:00"
+  },
+  {
+    "stage": "relationships",
+    "action": "approve",
+    "feedback": "",
+    "revision_mode": null,
+    "created_at": "2026-05-16T07:48:46.477533+00:00"
+  },
+  {
+    "stage": "biography",
+    "action": "approve",
+    "feedback": "",
+    "revision_mode": null,
+    "created_at": "2026-05-16T07:49:27.804463+00:00"
+  },
+  {
+    "stage": "outline",
+    "action": "approve",
+    "feedback": "",
+    "revision_mode": null,
+    "created_at": "2026-05-16T07:50:14.956935+00:00"
+  },
+  {
+    "stage": "final_script",
+    "action": "approve",
+    "feedback": "",
+    "revision_mode": null,
+    "created_at": "2026-05-16T07:51:48.989624+00:00"
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "job_id": "7a7e3fd80fcc40348d7792f1dcd0b86f",
+  "status": "waiting_confirmation",
+  "workflow_mode": "interactive",
+  "current_stage": "logline",
+  "pending_confirmation": {
+    "stage": "logline",
+    "stage_url": "/api/story-jobs/7a7e3fd80fcc40348d7792f1dcd0b86f/stages/logline",
+    "actions": [
+      "approve",
+      "revise"
+    ]
+  },
+  "confirmed_stages": [],
+  "revision_counts": {},
+  "available_sections": [
+    "logline"
+  ],
+  "pass_score": 85,
+  "max_critic_retries": 3,
+  "cancel_requested": false,
+  "replaced_by_job_id": null,
+  "critic_reports": [],
+  "project_id": "frontend_1779006170270_q82isa",
+  "updated_at": "2026-05-17T08:23:02.183997+00:00"
+}

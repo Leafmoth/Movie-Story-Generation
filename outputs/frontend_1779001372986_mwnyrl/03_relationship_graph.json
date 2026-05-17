@@ -1,0 +1,34 @@
+{
+  "relationship_graph": [
+    {
+      "source": "翎灰",
+      "target": "铁喙",
+      "relationship": "理念对立"
+    },
+    {
+      "source": "翎灰",
+      "target": "羽苏",
+      "relationship": "暗恋守护"
+    },
+    {
+      "source": "翎灰",
+      "target": "岩歌",
+      "relationship": "师徒传承"
+    },
+    {
+      "source": "翎灰",
+      "target": "风影",
+      "relationship": "情敌竞争"
+    },
+    {
+      "source": "铁喙",
+      "target": "岩歌",
+      "relationship": "观念冲突"
+    },
+    {
+      "source": "羽苏",
+      "target": "风影",
+      "relationship": "拒绝追求"
+    }
+  ]
+}

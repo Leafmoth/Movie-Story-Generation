@@ -1,0 +1,11 @@
+{
+  "critic_reports": [
+    {
+      "attempt": 0,
+      "score": 95,
+      "passed": true,
+      "issues": [],
+      "revision_advice": ""
+    }
+  ]
+}

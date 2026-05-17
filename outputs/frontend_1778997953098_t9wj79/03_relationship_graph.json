@@ -1,0 +1,29 @@
+{
+  "relationship_graph": [
+    {
+      "source": "翎灰",
+      "target": "棘喉",
+      "relationship": "族群路线对立"
+    },
+    {
+      "source": "翎灰",
+      "target": "云歌",
+      "relationship": "青梅竹马暗恋"
+    },
+    {
+      "source": "翎灰",
+      "target": "石喙",
+      "relationship": "师徒传承"
+    },
+    {
+      "source": "翎灰",
+      "target": "霜翼",
+      "relationship": "镜像对话"
+    },
+    {
+      "source": "翎灰",
+      "target": "族群",
+      "relationship": "被排斥者与集体"
+    }
+  ]
+}

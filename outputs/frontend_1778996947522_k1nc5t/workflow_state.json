@@ -1,0 +1,30 @@
+{
+  "job_id": "0cc652cebc8b44729361cfa0a680a37d",
+  "status": "waiting_confirmation",
+  "workflow_mode": "interactive",
+  "current_stage": "characters",
+  "pending_confirmation": {
+    "stage": "characters",
+    "stage_url": "/api/story-jobs/0cc652cebc8b44729361cfa0a680a37d/stages/characters",
+    "actions": [
+      "approve",
+      "revise"
+    ]
+  },
+  "confirmed_stages": [
+    "world"
+  ],
+  "revision_counts": {},
+  "available_sections": [
+    "logline",
+    "world",
+    "characters"
+  ],
+  "pass_score": 85,
+  "max_critic_retries": 3,
+  "cancel_requested": false,
+  "replaced_by_job_id": null,
+  "critic_reports": [],
+  "project_id": "frontend_1778996947522_k1nc5t",
+  "updated_at": "2026-05-17T05:50:19.498667+00:00"
+}

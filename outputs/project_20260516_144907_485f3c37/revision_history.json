@@ -1,0 +1,38 @@
+[
+  {
+    "stage": "logline",
+    "action": "approve",
+    "feedback": "",
+    "created_at": "2026-05-16T06:49:07.527436+00:00"
+  },
+  {
+    "stage": "world",
+    "action": "revise",
+    "feedback": "???????????",
+    "created_at": "2026-05-16T06:49:07.650908+00:00"
+  },
+  {
+    "stage": "world",
+    "action": "approve",
+    "feedback": "",
+    "created_at": "2026-05-16T06:49:07.777061+00:00"
+  },
+  {
+    "stage": "characters",
+    "action": "approve",
+    "feedback": "",
+    "created_at": "2026-05-16T06:49:07.897255+00:00"
+  },
+  {
+    "stage": "outline",
+    "action": "approve",
+    "feedback": "",
+    "created_at": "2026-05-16T06:49:08.024330+00:00"
+  },
+  {
+    "stage": "final_script",
+    "action": "approve",
+    "feedback": "",
+    "created_at": "2026-05-16T06:49:08.150870+00:00"
+  }
+]

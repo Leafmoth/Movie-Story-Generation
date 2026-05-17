@@ -1,0 +1,39 @@
+{
+  "relationship_graph": [
+    {
+      "source": "刘老栓",
+      "target": "刘小栓",
+      "relationship": "父子相依"
+    },
+    {
+      "source": "刘老栓",
+      "target": "赵大富",
+      "relationship": "乡邻争猪"
+    },
+    {
+      "source": "刘老栓",
+      "target": "王瘸子",
+      "relationship": "老邻相助"
+    },
+    {
+      "source": "刘老栓",
+      "target": "张屠户",
+      "relationship": "争猪对峙"
+    },
+    {
+      "source": "刘小栓",
+      "target": "张屠户",
+      "relationship": "劝解放下"
+    },
+    {
+      "source": "赵大富",
+      "target": "张屠户",
+      "relationship": "利益利用"
+    },
+    {
+      "source": "刘小栓",
+      "target": "王瘸子",
+      "relationship": "代际扶持"
+    }
+  ]
+}

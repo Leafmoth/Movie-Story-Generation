@@ -3,6 +3,9 @@
 一段梗概：
 [[Logline]]
 
+用户最开始输入的概述：
+[[input_logline]]
+
 角色设置：
 [[characters]]
 

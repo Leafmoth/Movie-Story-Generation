@@ -1,0 +1,9 @@
+{
+  "relationship_graph": [
+    {
+      "source": "主角",
+      "target": "对手",
+      "relationship": "核心冲突"
+    }
+  ]
+}

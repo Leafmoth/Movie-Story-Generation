@@ -1,0 +1,23 @@
+{
+  "job_id": "9e1d5f299ec545ce95669a569730812f",
+  "status": "succeeded",
+  "workflow_mode": "interactive",
+  "current_stage": null,
+  "pending_confirmation": null,
+  "confirmed_stages": [
+    "characters",
+    "relationships"
+  ],
+  "revision_counts": {},
+  "available_sections": [
+    "logline",
+    "world",
+    "characters",
+    "relationships",
+    "outline",
+    "final_script"
+  ],
+  "pass_score": 85,
+  "project_id": "project_20260516_160627_bddb0cc1",
+  "updated_at": "2026-05-16T08:06:27.763296+00:00"
+}
